@@ -70,6 +70,7 @@ function renderNavAuth() {
       <button class="nav-btn-solid" onclick="openAuthModal('register')">Join Free</button>
     `;
   }
+  renderMobileAuth();
 }
 
 function openAuthModal(tab = "login") {
@@ -877,6 +878,60 @@ async function cancelBooking(id) {
 
   toast("Could not cancel booking.", "error");
 }
+
+
+// ══════════════════════════════════════
+// BURGER MENU
+// ══════════════════════════════════════
+
+function toggleBurger() {
+  const burger = document.getElementById('burgerBtn');
+  const menu   = document.getElementById('mobileMenu');
+  if (!burger || !menu) return;
+  const isOpen = menu.classList.toggle('open');
+  burger.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+function closeBurger() {
+  const burger = document.getElementById('burgerBtn');
+  const menu   = document.getElementById('mobileMenu');
+  if (!burger || !menu) return;
+  menu.classList.remove('open');
+  burger.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function renderMobileAuth() {
+  const mobileAuth = document.getElementById('mobileAuthGroup');
+  if (!mobileAuth) return;
+  if (currentUser) {
+    const initials    = ((currentUser.firstName || 'U')[0] + (currentUser.lastName || '')[0]).toUpperCase();
+    const displayName = currentUser.firstName || currentUser.email;
+    mobileAuth.innerHTML = `
+      <div class="nav-user-pill">
+        <div class="nav-user-avatar">${initials || '★'}</div>
+        <span class="nav-user-name">${displayName}</span>
+      </div>
+      <button class="nav-btn-ghost" onclick="handleLogout(); closeBurger()">Sign Out</button>
+    `;
+  } else {
+    mobileAuth.innerHTML = `
+      <button class="nav-btn-outline" onclick="openAuthModal('login'); closeBurger()">Sign In</button>
+      <button class="nav-btn-solid"   onclick="openAuthModal('register'); closeBurger()">Join Free</button>
+    `;
+  }
+}
+
+// Close on outside click
+document.addEventListener('click', function(e) {
+  const menu   = document.getElementById('mobileMenu');
+  const burger = document.getElementById('burgerBtn');
+  if (menu && burger && menu.classList.contains('open') &&
+      !menu.contains(e.target) && !burger.contains(e.target)) {
+    closeBurger();
+  }
+});
 
 // ── TOAST
 function toast(msg, type = "success") {

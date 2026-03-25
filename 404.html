@@ -18,7 +18,18 @@
     <div class="nav-link" onclick="window.location.href='bookings.html'">My Bookings</div>
   </div>
   <div class="nav-auth-group" id="navAuthGroup"></div>
+  <button class="burger" id="burgerBtn" onclick="toggleBurger()" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="nav-link" onclick="window.location.href='index.html'; closeBurger()">Home</div>
+  <div class="nav-link" onclick="window.location.href='bookings.html'; closeBurger()">My Bookings</div>
+  <div class="mobile-menu-divider"></div>
+  <div class="mobile-menu-auth" id="mobileAuthGroup"></div>
+</div>
 
 <!-- AUTH MODAL -->
 <div class="modal-backdrop" id="authModal">
