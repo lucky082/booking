@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STAYRA — Page Not Found</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="404.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="window.location.href='index.html'">STAYRA</div>
+  <div class="nav-links">
+    <div class="nav-link" onclick="window.location.href='index.html'">Home</div>
+    <div class="nav-link" onclick="window.location.href='bookings.html'">My Bookings</div>
+  </div>
+  <div class="nav-auth-group" id="navAuthGroup"></div>
+</nav>
+
+<!-- AUTH MODAL -->
+<div class="modal-backdrop" id="authModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeAuthModal()">✕</button>
+    <div class="modal-header">
+      <div class="modal-logo">STAYRA</div>
+    </div>
+    <div class="modal-tabs">
+      <div class="modal-tab active" id="tabLogin" onclick="switchAuthTab('login')">Sign In</div>
+      <div class="modal-tab" id="tabRegister" onclick="switchAuthTab('register')">Create Account</div>
+    </div>
+    <div class="modal-body">
+      <div class="auth-form active" id="formLogin">
+        <div class="auth-global-error" id="loginError"></div>
+        <div class="auth-global-success" id="loginSuccess"></div>
+        <div class="form-field">
+          <label class="form-label">Email address</label>
+          <input class="form-input" id="loginEmail" type="email" placeholder="you@example.com" autocomplete="email" />
+        </div>
+        <div class="form-field">
+          <label class="form-label">Password</label>
+          <div class="form-input-wrap">
+            <input class="form-input" id="loginPassword" type="password" placeholder="Your password" autocomplete="current-password" />
+            <span class="toggle-password" onclick="togglePwd('loginPassword', this)">👁</span>
+          </div>
+        </div>
+        <button class="auth-submit-btn" onclick="handleLogin()">Sign In</button>
+        <div class="auth-switch">Don't have an account? <a onclick="switchAuthTab('register')">Create one</a></div>
+      </div>
+      <div class="auth-form" id="formRegister">
+        <div class="auth-global-error" id="registerError"></div>
+        <div class="auth-global-success" id="registerSuccess"></div>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label">First name</label>
+            <input class="form-input" id="regFirstName" type="text" placeholder="Jane" autocomplete="given-name" />
+            <div class="form-error" id="errFirstName">Required</div>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Last name</label>
+            <input class="form-input" id="regLastName" type="text" placeholder="Smith" autocomplete="family-name" />
+            <div class="form-error" id="errLastName">Required</div>
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Email address</label>
+          <input class="form-input" id="regEmail" type="email" placeholder="you@example.com" autocomplete="email" />
+          <div class="form-error" id="errEmail">Enter a valid email</div>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Password</label>
+          <div class="form-input-wrap">
+            <input class="form-input" id="regPassword" type="password" placeholder="Min. 8 characters" autocomplete="new-password" oninput="checkPasswordStrength(this.value)" />
+            <span class="toggle-password" onclick="togglePwd('regPassword', this)">👁</span>
+          </div>
+          <div class="form-error" id="errPassword">Min. 8 characters required</div>
+          <div class="password-strength" id="passwordStrength">
+            <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+            <span class="strength-label" id="strengthLabel"></span>
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Confirm password</label>
+          <div class="form-input-wrap">
+            <input class="form-input" id="regPasswordConfirm" type="password" placeholder="Repeat password" autocomplete="new-password" />
+            <span class="toggle-password" onclick="togglePwd('regPasswordConfirm', this)">👁</span>
+          </div>
+          <div class="form-error" id="errPasswordConfirm">Passwords do not match</div>
+        </div>
+        <button class="auth-submit-btn" onclick="handleRegister()">Create Account</button>
+        <div class="auth-switch">Already have an account? <a onclick="switchAuthTab('login')">Sign in</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 404 CONTENT -->
+<div class="error-page">
+  <div class="error-container">
+    <div class="error-icon">🏨</div>
+    <div class="error-code">404</div>
+    <div class="error-divider"></div>
+    <div class="error-title">Room Not Found</div>
+    <div class="error-subtitle">
+      The page you're looking for seems to have checked out.<br>
+      It may have moved, been removed, or never existed.
+    </div>
+    <div class="error-actions">
+      <button class="nav-btn-solid" onclick="window.location.href='index.html'">Browse Hotels</button>
+      <button class="nav-btn-outline" onclick="history.back()">Go Back</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="app.js"></script>
+<script src="404.js"></script>
+
+</body>
+</html>
